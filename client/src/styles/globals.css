@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* styles/globals.css */
+body {
+  background-color: white; /* Default background color */
+  color: black; /* Default text color */
+}
+
+.dark body {
+  background-color: #1e293b; /* Example for dark mode background */
+  color: white; /* Example for dark mode text */
+}
