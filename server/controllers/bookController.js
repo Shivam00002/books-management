@@ -1,5 +1,6 @@
 const Book = require('../models/Book');
 
+// Create a new book
 exports.createBook = async (req, res) => {
   try {
     const newBook = new Book({
@@ -8,13 +9,14 @@ exports.createBook = async (req, res) => {
     });
 
     const book = await newBook.save();
-    res.json(book);
+    res.json({ msg: 'Book created successfully', book });
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
   }
 };
 
+// Get all books for the user
 exports.getBooks = async (req, res) => {
   try {
     const books = await Book.find({ user: req.user.id });
@@ -25,6 +27,7 @@ exports.getBooks = async (req, res) => {
   }
 };
 
+// Update a book
 exports.updateBook = async (req, res) => {
   try {
     let book = await Book.findById(req.params.id);
@@ -36,14 +39,14 @@ exports.updateBook = async (req, res) => {
     }
 
     book = await Book.findByIdAndUpdate(req.params.id, req.body, { new: true });
-
-    res.json(book);
+    res.json({ msg: 'Book updated successfully', book });
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
   }
 };
 
+// Delete a book
 exports.deleteBook = async (req, res) => {
   try {
     let book = await Book.findById(req.params.id);
@@ -54,11 +57,12 @@ exports.deleteBook = async (req, res) => {
       return res.status(401).json({ msg: 'Not authorized' });
     }
 
-    await Book.findByIdAndRemove(req.params.id);
+    await Book.findByIdAndDelete(req.params.id); 
 
-    res.json({ msg: 'Book removed' });
+    res.json({ msg: 'Book deleted successfully' });
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
   }
 };
+
