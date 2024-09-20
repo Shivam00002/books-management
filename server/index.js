@@ -10,7 +10,6 @@ const app = express();
 // Connect to MongoDB
 connectDB();
 
-
 const corsOptions = {
     origin: [process.env.FRONTEND_URL, "http://localhost:3000"],
     methods: ["GET", "POST", "PUT", "DELETE"],
@@ -20,6 +19,11 @@ const corsOptions = {
 // Middleware
 app.use(cors(corsOptions));
 app.use(express.json());
+
+// Welcome message route
+app.get('/', (req, res) => {
+    res.send('Welcome to the Books Management API 🔥📚');
+});
 
 // Routes
 app.use('/auth', authRoutes);
