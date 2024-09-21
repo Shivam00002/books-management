@@ -25,7 +25,7 @@ const BookSchema = new mongoose.Schema({
     isbn: {
         type: String,
         required: true,
-        unique: true,
+      
     },
 }, { timestamps: true });
 

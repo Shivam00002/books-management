@@ -5,6 +5,7 @@ import { RiLogoutCircleLine } from "react-icons/ri";
 import { IoMdLogIn } from "react-icons/io";
 import { IoMenu } from "react-icons/io5";
 import Link from "next/link";
+import { useAuth } from "../contexts/AuthContext";
 
 const Navbar: React.FC = () => {
   const [darkMode, setDarkMode] = useState<boolean>(false);
@@ -12,6 +13,8 @@ const Navbar: React.FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
 
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const { isAuthenticated, logout } = useAuth();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -121,8 +124,9 @@ const Navbar: React.FC = () => {
                     >
                       Home 🏠
                     </Link>
-                    {true ? (
+                    {isAuthenticated ? (
                       <Link
+                        onClick={logout}
                         href="/"
                         className="block px-4 py-2 text-sm text-red-700 font-semibold dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-slate-900"
                       >
@@ -186,8 +190,9 @@ const Navbar: React.FC = () => {
               <span>Home</span>
             </Link>
 
-            {true ? (
+            {isAuthenticated ? (
               <Link
+                onClick={logout}
                 href="/"
                 className="flex items-center text-red-400  hover:text-gray-500 dark:hover:text-gray-300"
               >

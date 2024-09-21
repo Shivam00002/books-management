@@ -11,7 +11,7 @@ const app = express();
 connectDB();
 
 const corsOptions = {
-    origin: [process.env.FRONTEND_URL, "http://localhost:3000"],
+    origin: [process.env.FRONTEND_URL, "http://localhost:3000" , "books-management-ocb5.vercel.app"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
 };
