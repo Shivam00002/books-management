@@ -7,7 +7,7 @@ const bookRoutes = require('./routes/bookRoutes');
 
 const app = express();
 
-// Connect to MongoDB
+
 connectDB();
 
 const corsOptions = {
@@ -16,16 +16,16 @@ const corsOptions = {
     credentials: true,
 };
 
-// Middleware
+
 app.use(cors(corsOptions));
 app.use(express.json());
 
-// Welcome message route
+
 app.get('/', (req, res) => {
     res.send('Welcome to the Books Management API 🔥📚');
 });
 
-// Routes
+
 app.use('/auth', authRoutes);
 app.use('/books', bookRoutes);
 

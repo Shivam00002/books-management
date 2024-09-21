@@ -1,6 +1,6 @@
 const Book = require('../models/Book');
 
-// Create a new book
+
 exports.createBook = async (req, res) => {
   try {
     const newBook = new Book({
@@ -16,7 +16,7 @@ exports.createBook = async (req, res) => {
   }
 };
 
-// Get all books for the user
+
 exports.getBooks = async (req, res) => {
   try {
     const books = await Book.find({ user: req.user.id });
@@ -27,7 +27,7 @@ exports.getBooks = async (req, res) => {
   }
 };
 
-// Update a book
+
 exports.updateBook = async (req, res) => {
   try {
     let book = await Book.findById(req.params.id);
@@ -46,7 +46,7 @@ exports.updateBook = async (req, res) => {
   }
 };
 
-// Delete a book
+
 exports.deleteBook = async (req, res) => {
   try {
     let book = await Book.findById(req.params.id);
@@ -57,7 +57,7 @@ exports.deleteBook = async (req, res) => {
       return res.status(401).json({ msg: 'Not authorized' });
     }
 
-    await Book.findByIdAndDelete(req.params.id); 
+    await Book.findByIdAndDelete(req.params.id);
 
     res.json({ msg: 'Book deleted successfully' });
   } catch (err) {
