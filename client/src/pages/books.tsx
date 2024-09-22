@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import BookForm from "@/components/BookForm";
 import BookList from "@/components/BookList";
 
-interface BookData {
+interface Book {
   _id: string;
   title: string;
   author: string;
@@ -18,7 +18,7 @@ interface BookData {
 const API_URL = backend_url;
 
 const Books: React.FC = () => {
-  const [books, setBooks] = useState<BookData[]>([]);
+  const [books, setBooks] = useState<Book[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
@@ -34,7 +34,7 @@ const Books: React.FC = () => {
       const token = localStorage.getItem("token");
       if (!token) throw new Error("No token found");
 
-      const response = await axios.get<BookData[]>(`${API_URL}/books`, {
+      const response = await axios.get<Book[]>(`${API_URL}/books`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setBooks(response.data);
@@ -49,13 +49,13 @@ const Books: React.FC = () => {
     }
   };
 
-  const addBook = async (newBook: Omit<BookData, "_id">) => {
+  const addBook = async (newBook: Omit<Book, "_id">) => {
     setError(null);
     try {
       const token = localStorage.getItem("token");
       if (!token) throw new Error("No token found");
 
-      await axios.post<BookData>(`${API_URL}/books`, newBook, {
+      await axios.post<Book>(`${API_URL}/books`, newBook, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchBooks();
@@ -65,13 +65,13 @@ const Books: React.FC = () => {
     }
   };
 
-  const updateBook = async (id: string, updatedBook: Omit<BookData, "_id">) => {
+  const updateBook = async (id: string, updatedBook: Omit<Book, "_id">) => {
     setError(null);
     try {
       const token = localStorage.getItem("token");
       if (!token) throw new Error("No token found");
 
-      await axios.put<BookData>(`${API_URL}/books/${id}`, updatedBook, {
+      await axios.put<Book>(`${API_URL}/books/${id}`, updatedBook, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchBooks();
