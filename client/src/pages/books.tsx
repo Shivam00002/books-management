@@ -98,7 +98,8 @@ const Books: React.FC = () => {
   };
 
   return (
-    <div className="container mx-auto p-4 bg-white dark:bg-slate-950 transition-colors duration-500">
+    <div className=" w-full dark:bg-black h-screen">
+ <div className="container mx-auto p-4 bg-white dark:bg-slate-950 transition-colors duration-500">
       <Head>
         <title>Book Management - Your Library</title>
         <meta
@@ -110,15 +111,6 @@ const Books: React.FC = () => {
 
       <BookForm onAddBook={addBook} />
 
-      {error && (
-        <div
-          className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4"
-          role="alert"
-        >
-          <span className="block sm:inline">{error}</span>
-        </div>
-      )}
-
       <BookList
         books={books}
         isLoading={isLoading}
@@ -126,6 +118,8 @@ const Books: React.FC = () => {
         onDeleteBook={deleteBook}
       />
     </div>
+    </div>
+   
   );
 };
 

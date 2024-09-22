@@ -71,6 +71,9 @@ const Book: React.FC<BookProps> = ({
 
   if (isEditing) {
     return (
+  
+   
+
       <tr className="border-b dark:border-gray-700">
         <td className="p-2">{index + 1}</td>
         <td className="p-2">
@@ -160,15 +163,16 @@ const Book: React.FC<BookProps> = ({
   }
 
   return (
-    <tr className="border-b dark:border-gray-700">
-      <td className="p-2">{index + 1}</td>
-      <td className="p-2">{book.title}</td>
-      <td className="p-2 hidden sm:table-cell">{book.author}</td>
-      <td className="p-2 hidden md:table-cell">{book.genre}</td>
-      <td className="p-2 hidden lg:table-cell">{book.yearOfPublishing}</td>
-      <td className="p-2 hidden xl:table-cell">{book.isbn}</td>
+    <tr className="border-b relative dark:border-gray-700">
+      <td className="p-2 dark:text-gray-300">{index + 1}</td>
+      <td className="p-2 dark:text-gray-300">{book.title}</td>
+      <td className="p-2 hidden sm:table-cell dark:text-gray-300">{book.author}</td>
+      <td className="p-2 hidden md:table-cell dark:text-gray-300">{book.genre}</td>
+      <td className="p-2 hidden lg:table-cell dark:text-gray-300" >{book.yearOfPublishing}</td>
+      <td className="p-2 hidden xl:table-cell dark:text-gray-300">{book.isbn}</td>
       <td className="p-2">
-        <div className="flex justify-end space-x-2">
+
+        <div className="flex md:absolute  right-34 justify-end space-x-2">
           <button
             onClick={() => {
               setEditForm(book);

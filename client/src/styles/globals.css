@@ -5,3 +5,18 @@
 body {
   @apply bg-white text-black dark:bg-slate-950 dark:text-white;
 }
+
+.comic-text{
+  color: #35a7f9;
+  font-family: 'Tangerine', cursive; 
+}
+
+.comic-smoll{
+  color: #414e57;
+  font-family: 'Tangerine', cursive; 
+}
+
+.comic-s2{
+  color: #2aaff1;
+  font-family: 'Tangerine', cursive; 
+}

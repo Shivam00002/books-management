@@ -71,7 +71,7 @@ const Signup: React.FC = () => {
           <h1 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-2">
             Sign Up
           </h1>
-          <p className="text-gray-900 dark:text-white text-[15px] text-sm whitespace-nowrap mb-4 md:mb-6">
+          <p className="text-gray-900 dark:text-white text-[15px] text-sm  mb-4 md:mb-6">
             Let's get started with Book Management 30 days free trial
           </p>
 

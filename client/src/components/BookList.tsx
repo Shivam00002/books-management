@@ -39,13 +39,21 @@ const BookList: React.FC<BookListProps> = ({
       <table className="w-full border-collapse">
         <thead>
           <tr className="bg-gray-100 dark:bg-slate-800">
-            <th className="p-2 text-left">S no.</th>
-            <th className="p-2 text-left">Title</th>
-            <th className="p-2 text-left hidden sm:table-cell">Author</th>
-            <th className="p-2 text-left hidden md:table-cell">Genre</th>
-            <th className="p-2 text-left hidden lg:table-cell">Year</th>
-            <th className="p-2 text-left hidden xl:table-cell">ISBN</th>
-            <th className="p-2 text-left">Actions</th>
+            <th className="p-2 text-left dark:text-gray-300">S no.</th>
+            <th className="p-2 text-left dark:text-gray-300">Title</th>
+            <th className="p-2 text-left hidden sm:table-cell  dark:text-gray-300">
+              Author
+            </th>
+            <th className="p-2 text-left hidden md:table-cell dark:text-gray-300">
+              Genre
+            </th>
+            <th className="p-2 text-left hidden lg:table-cell dark:text-gray-300">
+              Year
+            </th>
+            <th className="p-2 text-left hidden xl:table-cell dark:text-gray-300">
+              ISBN
+            </th>
+            <th className="p-2 text-left dark:text-gray-300">Actions</th>
           </tr>
         </thead>
         <tbody>

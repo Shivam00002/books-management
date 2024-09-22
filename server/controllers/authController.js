@@ -25,6 +25,7 @@ exports.register = async (req, res) => {
     const payload = {
       user: {
         id: user.id,
+        username: username,
       },
     };
 
@@ -36,6 +37,7 @@ exports.register = async (req, res) => {
         if (err) throw err;
         res.json({
           token,
+          username,
           msg: 'User registered successfully',
         });
       }
@@ -45,8 +47,6 @@ exports.register = async (req, res) => {
     res.status(500).send('Server error');
   }
 };
-
-
 
 exports.login = async (req, res) => {
   const { email, password } = req.body;
@@ -65,8 +65,11 @@ exports.login = async (req, res) => {
     const payload = {
       user: {
         id: user.id,
+        username: user.username,
       },
     };
+
+
 
     jwt.sign(
       payload,
@@ -76,6 +79,7 @@ exports.login = async (req, res) => {
         if (err) throw err;
         res.json({
           token,
+          username: user.username,
           msg: 'User logged in successfully',
         });
       }

@@ -82,8 +82,8 @@ const BookForm: React.FC<BookFormProps> = ({ onAddBook }) => {
           value={newBook.yearOfPublishing}
           onChange={handleYearChange}
           className="w-full p-2 border rounded dark:bg-slate-700 dark:text-gray-300"
-          min="1000" // Minimum valid year
-          max={new Date().getFullYear()} // Current year as maximum
+          min="1000" 
+          max={new Date().getFullYear()} 
         />
         <input
           type="text"
