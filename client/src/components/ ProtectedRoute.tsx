@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/router";
 
@@ -7,14 +7,12 @@ const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   const router = useRouter();
 
   useEffect(() => {
-    const storedToken = localStorage.getItem("token");
-
-    if (storedToken) {
-      router.replace("/books");
+    if (!isAuthenticated) {
+      router.replace("/signup");
     }
   }, [isAuthenticated, router]);
 
-  return isAuthenticated ? children : null;
+  return children;
 };
 
 export default ProtectedRoute;

@@ -76,8 +76,11 @@ const BookManagement: React.FC = () => {
   );
 
   return (
-    <div className="container mx-auto p-4 bg-white dark:bg-slate-950 transition-colors duration-500">
+    <div className="container  border border-red-400 bg-red-600 mx-auto p-4 dark:bg-slate-950 transition-colors duration-500">
       {/* New book form */}
+
+
+
       <div className="bg-gray-100 dark:bg-slate-800 p-4 rounded-lg mb-4">
         <h2 className="text-md font-bold mb-2 text-gray-600 dark:text-gray-200">
           Add new book here
@@ -129,6 +132,23 @@ const BookManagement: React.FC = () => {
           ➕ Add Book
         </button>
       </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
       {/* Book list */}
       <div className="overflow-x-auto">
@@ -201,7 +221,7 @@ const BookManagement: React.FC = () => {
                         onClick={saveEdit}
                         className="mr-2 text-green-500 dark:text-green-400"
                       >
-                        💾 Save
+                      Save
                       </button>
                       <button
                         onClick={cancelEdit}
