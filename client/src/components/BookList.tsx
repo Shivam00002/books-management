@@ -1,10 +1,22 @@
 import React from "react";
-import Book from "./ Book";
+import BookComponent from "./ Book";
+
+interface BookData {
+  _id: string;
+  title: string;
+  author: string;
+  genre: string;
+  yearOfPublishing: number;
+  isbn: string;
+}
 
 interface BookListProps {
-  books: Book[];
+  books: BookData[];
   isLoading: boolean;
-  onUpdateBook: (id: string, updatedBook: Omit<Book, "_id">) => Promise<void>;
+  onUpdateBook: (
+    id: string,
+    updatedBook: Omit<BookData, "_id">
+  ) => Promise<void>;
   onDeleteBook: (id: string) => Promise<void>;
 }
 
@@ -38,7 +50,7 @@ const BookList: React.FC<BookListProps> = ({
         </thead>
         <tbody>
           {books.map((book, index) => (
-            <Book
+            <BookComponent
               key={book._id}
               book={book}
               index={index}

@@ -1,49 +1,56 @@
 import React, { useState } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 
-interface Book {
+interface BookData {
   _id: string;
   title: string;
   author: string;
   genre: string;
-  yearOfPublishing: Date;
+  yearOfPublishing: number;
   isbn: string;
 }
 
 interface BookProps {
-  book: Book;
+  book: BookData;
   index: number;
-  onUpdateBook: (id: string, updatedBook: Omit<Book, "_id">) => Promise<void>;
+  onUpdateBook: (
+    id: string,
+    updatedBook: Omit<BookData, "_id">
+  ) => Promise<void>;
   onDeleteBook: (id: string) => Promise<void>;
 }
 
 const Book: React.FC<BookProps> = ({
-  book,
+  book: initialBook,
   index,
   onUpdateBook,
   onDeleteBook,
 }) => {
+  const [book, setBook] = useState<BookData>(initialBook);
   const [isEditing, setIsEditing] = useState(false);
-  const [editForm, setEditForm] = useState<Book>(book);
+  const [editForm, setEditForm] = useState<BookData>(book);
   const [isUpdating, setIsUpdating] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 
   const handleEditInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
-    field: keyof Book
+    field: keyof BookData
   ) => {
-    setEditForm((prev) => ({ ...prev, [field]: e.target.value }));
-  };
-
-  const handleEditDateChange = (date: Date) => {
-    setEditForm((prev) => ({ ...prev, yearOfPublishing: date }));
+    const value =
+      field === "yearOfPublishing"
+        ? parseInt(e.target.value, 10) || 0
+        : e.target.value;
+    setEditForm((prev) => ({ ...prev, [field]: value }));
   };
 
   const handleUpdate = async () => {
     setIsUpdating(true);
     try {
-      await onUpdateBook(book._id, editForm);
+      const updatedBook: Omit<BookData, "_id"> = {
+        ...editForm,
+        yearOfPublishing: Number(editForm.yearOfPublishing),
+      };
+      await onUpdateBook(book._id, updatedBook);
+      setBook({ ...book, ...updatedBook });
       setIsEditing(false);
     } catch (error) {
       console.error("Error updating book:", error);
@@ -60,14 +67,6 @@ const Book: React.FC<BookProps> = ({
       console.error("Error deleting book:", error);
       setIsDeleting(false);
     }
-  };
-
-  const formatDate = (date: Date) => {
-    return date.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
   };
 
   if (isEditing) {
@@ -99,10 +98,10 @@ const Book: React.FC<BookProps> = ({
           />
         </td>
         <td className="p-2 hidden lg:table-cell">
-          <DatePicker
-            selected={editForm.yearOfPublishing}
-            onChange={handleEditDateChange}
-            dateFormat="yyyy-MM-dd"
+          <input
+            type="number"
+            value={editForm.yearOfPublishing}
+            onChange={(e) => handleEditInputChange(e, "yearOfPublishing")}
             className="w-full p-1 border rounded dark:bg-slate-700 dark:text-gray-300"
           />
         </td>
@@ -166,14 +165,15 @@ const Book: React.FC<BookProps> = ({
       <td className="p-2">{book.title}</td>
       <td className="p-2 hidden sm:table-cell">{book.author}</td>
       <td className="p-2 hidden md:table-cell">{book.genre}</td>
-      <td className="p-2 hidden lg:table-cell">
-        {formatDate(book.yearOfPublishing)}
-      </td>
+      <td className="p-2 hidden lg:table-cell">{book.yearOfPublishing}</td>
       <td className="p-2 hidden xl:table-cell">{book.isbn}</td>
       <td className="p-2">
         <div className="flex justify-end space-x-2">
           <button
-            onClick={() => setIsEditing(true)}
+            onClick={() => {
+              setEditForm(book);
+              setIsEditing(true);
+            }}
             className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-500"
           >
             ✏️

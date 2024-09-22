@@ -6,19 +6,19 @@ import { useRouter } from "next/router";
 import BookForm from "@/components/BookForm";
 import BookList from "@/components/BookList";
 
-interface Book {
+interface BookData {
   _id: string;
   title: string;
   author: string;
   genre: string;
-  yearOfPublishing: Date;
+  yearOfPublishing: number;
   isbn: string;
 }
 
 const API_URL = backend_url;
 
 const Books: React.FC = () => {
-  const [books, setBooks] = useState<Book[]>([]);
+  const [books, setBooks] = useState<BookData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
@@ -34,15 +34,10 @@ const Books: React.FC = () => {
       const token = localStorage.getItem("token");
       if (!token) throw new Error("No token found");
 
-      const response = await axios.get<Book[]>(`${API_URL}/books`, {
+      const response = await axios.get<BookData[]>(`${API_URL}/books`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setBooks(
-        response.data.map((book) => ({
-          ...book,
-          yearOfPublishing: new Date(book.yearOfPublishing),
-        }))
-      );
+      setBooks(response.data);
     } catch (err) {
       console.error("Error fetching books:", err);
       setError("Failed to fetch books. Please try again.");
@@ -54,16 +49,15 @@ const Books: React.FC = () => {
     }
   };
 
-  const addBook = async (newBook: Omit<Book, "_id">) => {
+  const addBook = async (newBook: Omit<BookData, "_id">) => {
     setError(null);
     try {
       const token = localStorage.getItem("token");
       if (!token) throw new Error("No token found");
 
-      const response = await axios.post<Book>(`${API_URL}/books`, newBook, {
+      await axios.post<BookData>(`${API_URL}/books`, newBook, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setBooks((prevBooks) => [...prevBooks, response.data]);
       fetchBooks();
     } catch (error) {
       console.error("Error adding book:", error);
@@ -71,22 +65,16 @@ const Books: React.FC = () => {
     }
   };
 
-  const updateBook = async (id: string, updatedBook: Omit<Book, "_id">) => {
+  const updateBook = async (id: string, updatedBook: Omit<BookData, "_id">) => {
     setError(null);
     try {
       const token = localStorage.getItem("token");
       if (!token) throw new Error("No token found");
 
-      const response = await axios.put<Book>(
-        `${API_URL}/books/${id}`,
-        updatedBook,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-      setBooks((prevBooks) =>
-        prevBooks.map((book) => (book._id === id ? response.data : book))
-      );
+      await axios.put<BookData>(`${API_URL}/books/${id}`, updatedBook, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      fetchBooks();
     } catch (error) {
       console.error("Error updating book:", error);
       setError("Failed to update book. Please try again.");
@@ -102,7 +90,7 @@ const Books: React.FC = () => {
       await axios.delete(`${API_URL}/books/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setBooks((prevBooks) => prevBooks.filter((book) => book._id !== id));
+      fetchBooks();
     } catch (error) {
       console.error("Error deleting book:", error);
       setError("Failed to delete book. Please try again.");
