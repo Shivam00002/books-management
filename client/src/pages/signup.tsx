@@ -40,6 +40,7 @@ const Signup: React.FC = () => {
 
       if (response.ok) {
         localStorage.setItem("token", data.token);
+        localStorage.setItem("username", username);
         login(data.token);
         toast.success("Account created successfully😍");
         router.push("/books");
@@ -49,6 +50,7 @@ const Signup: React.FC = () => {
       }
     } catch (err) {
       setError("An error occurred. Please try again.");
+      toast.error("An error occurred. Please try again. 😣");
     } finally {
       setLoading(false);
     }

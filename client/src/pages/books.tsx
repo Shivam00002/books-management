@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Head from "next/head";
 import { backend_url } from "../libs/url";
+import toast from "react-hot-toast";
 import { useRouter } from "next/router";
 import BookForm from "@/components/BookForm";
 import BookList from "@/components/BookList";
@@ -59,9 +60,11 @@ const Books: React.FC = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchBooks();
+      toast.success("Book created😍");
     } catch (error) {
       console.error("Error adding book:", error);
       setError("Failed to add book. Please try again.");
+      toast.error("Failed to add book. Please try again.😣");
     }
   };
 
@@ -75,9 +78,11 @@ const Books: React.FC = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchBooks();
+      toast.success("Book Updated! ✏️");
     } catch (error) {
       console.error("Error updating book:", error);
       setError("Failed to update book. Please try again.");
+      toast.error("Failed to update book. Please try again.😣");
     }
   };
 
@@ -91,9 +96,11 @@ const Books: React.FC = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchBooks();
+      toast.success("Book Deleted! 😐");
     } catch (error) {
       console.error("Error deleting book:", error);
       setError("Failed to delete book. Please try again.");
+      toast.error("Failed to delete book. Please try again.😣");
     }
   };
 

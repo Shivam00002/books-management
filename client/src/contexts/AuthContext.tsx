@@ -49,6 +49,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setToken(null);
     setIsAuthenticated(false);
     localStorage.removeItem("token");
+    localStorage.removeItem("username");
     router.push("/signup");
   };
 

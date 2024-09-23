@@ -82,8 +82,8 @@ const BookForm: React.FC<BookFormProps> = ({ onAddBook }) => {
           value={newBook.yearOfPublishing}
           onChange={handleYearChange}
           className="w-full p-2 border rounded dark:bg-slate-700 dark:text-gray-300"
-          min="1000" 
-          max={new Date().getFullYear()} 
+          min="1000"
+          max={new Date().getFullYear()}
         />
         <input
           type="text"
@@ -96,10 +96,10 @@ const BookForm: React.FC<BookFormProps> = ({ onAddBook }) => {
       <button
         type="submit"
         disabled={!isFormValid() || isSubmitting}
-        className={`bg-blue-500 text-white p-2 rounded ${
+        className={`bg-[#35a7f9] text-white p-2 rounded ${
           !isFormValid() || isSubmitting
             ? "opacity-50 cursor-not-allowed"
-            : "hover:bg-blue-600"
+            : "hover:bg-[#1d8ede]"
         }`}
       >
         {isSubmitting ? (

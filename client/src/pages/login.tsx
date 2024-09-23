@@ -39,6 +39,7 @@ const Login: React.FC = () => {
       }
     } catch (err) {
       setError("An error occurred. Please try again.");
+      toast.error("An error occurred. Please try again. 😣");
     } finally {
       setLoading(false);
     }

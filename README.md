@@ -3,7 +3,6 @@
 This project is a full-stack application for managing books, built with Next.js, Tailwind CSS, and TypeScript for the front end, and Express.js with Node.js for the backend. The application allows users to sign up, log in, and create their own book entries.
 
 ## Table of Contents
-
 - [Features](#features)
 - [Prerequisites](#prerequisites)
 - [Getting Started](#getting-started)
