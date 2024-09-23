@@ -168,7 +168,7 @@ const Signup: React.FC = () => {
               </div>
             </div>
 
-            <div className="mt-6 space-y-4">
+            {/* <div className="mt-6 space-y-4">
               <button className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
                 <img
                   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStiZIUhPzyamlPDOS8XDKcZM8Rcg6gofLx_g&s"
@@ -177,7 +177,7 @@ const Signup: React.FC = () => {
                 />
                 Sign up with Google
               </button>
-            </div>
+            </div> */}
           </div>
 
           <p className="text-center text-xs text-gray-900 dark:text-white mt-8">
