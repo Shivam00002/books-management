@@ -60,9 +60,9 @@ const Navbar: React.FC = () => {
           <div className="flex items-center">
             <div className="flex-shrink-0">
               <h1 className="text-blue-500 dark:text-white text-xl sm:text-2 md:mt-0 -mt-1 text-[10px] md:ml-0 ml-1 font-semibold">
-                <Link href="/"> Book Management 📚 </Link>
+                <Link className="comic-text md:text-[23px] font-semibold " href="/"> Book Management 📚 </Link>
               </h1>
-              <span className="text-gray-600 dark:text-gray-400 text-sm hidden sm:block">
+              <span className="comic-smoll font-semibold text-gray-600 dark:text-gray-400 text-sm hidden sm:block">
                 Create your own book
               </span>
             </div>
@@ -73,8 +73,8 @@ const Navbar: React.FC = () => {
                 <div>
                   {true ? (
                     <div>
-                      <span className="text-blue-500">Welcome 😊 </span>
-                      <span className="text-orange-600">Naam 🔥</span>
+                      <span className="comic-s2 font-semibold text-blue-500">Welcome 😊 </span>
+                      <span className="comic-s1 text-orange-600">Naam 🔥</span>
                     </div>
                   ) : (
                     ""

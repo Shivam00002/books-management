@@ -17,6 +17,11 @@ body {
 }
 
 .comic-s2{
-  color: #2aaff1;
+  color: #35a7f9;
+  font-family: 'Tangerine', cursive; 
+}
+
+.comic-s1{
+  color: #e3941c;
   font-family: 'Tangerine', cursive; 
 }
